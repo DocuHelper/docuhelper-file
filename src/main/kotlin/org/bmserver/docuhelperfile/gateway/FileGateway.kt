@@ -2,6 +2,7 @@ package org.bmserver.docuhelperfile.gateway
 
 import org.bmserver.docuhelperfile.core.File
 import org.bmserver.docuhelperfile.core.FileServiceApplication
+import org.bmserver.docuhelperfile.core.response.UploadUrl
 import org.bmserver.docuhelperfile.core.useCase.CreateUploadUrlUseCase
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -22,7 +23,7 @@ class FileGateway(
     @PostMapping
     fun uploadUrl(
         @RequestBody file: Mono<CreateUploadUrlUseCase>,
-    ): Mono<URL> =
+    ): Mono<UploadUrl> =
         file.flatMap {
             fileServiceApplication.getFileUploadPreSignedUrl(it)
         }

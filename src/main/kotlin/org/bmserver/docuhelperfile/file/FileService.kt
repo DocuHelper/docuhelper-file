@@ -3,6 +3,7 @@ package org.bmserver.docuhelperfile.file
 import org.bmserver.docuhelperfile.core.File
 import org.bmserver.docuhelperfile.core.FileManager
 import org.bmserver.docuhelperfile.core.FileServiceApplication
+import org.bmserver.docuhelperfile.core.response.UploadUrl
 import org.bmserver.docuhelperfile.core.useCase.CreateUploadUrlUseCase
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
@@ -14,13 +15,19 @@ class FileService(
     private val fileManager: FileManager,
     private val fileDBManager: FileDBManager,
 ) : FileServiceApplication {
-    override fun getFileUploadPreSignedUrl(file: CreateUploadUrlUseCase): Mono<URL> =
+    override fun getFileUploadPreSignedUrl(file: CreateUploadUrlUseCase): Mono<UploadUrl> =
         fileDBManager
             .save(file.toFile())
             .map {
-                fileManager.getPreSignedUrl(
-                    path = it.uuid.toString(),
-                    name = it.name,
+                val url: URL =
+                    fileManager.getPreSignedUrl(
+                        path = it.uuid.toString(),
+                        name = it.name,
+                    )
+
+                UploadUrl(
+                    uuid = it.uuid!!,
+                    url = url,
                 )
             }
 
