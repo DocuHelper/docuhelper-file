@@ -11,7 +11,7 @@ spring:
 
 s3:
   bucket: ${S3_BUCKET:docuhelper}
-  endPoint: ${S3_ENDPOINT:http://192.168.0.7:9000}
+  endPoint: ${S3_ENDPOINT:https://minio.bmserver.org}
   region: ${S3_REGION:ap-northeast-2}
   credentials:
     accessKey: ${S3_ACCESS_KEY:minioadmin}
