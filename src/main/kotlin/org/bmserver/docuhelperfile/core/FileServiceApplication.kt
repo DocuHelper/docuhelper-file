@@ -9,7 +9,9 @@ import java.util.UUID
 interface FileServiceApplication {
     fun getFileUploadPreSignedUrl(file: CreateUploadUrlUseCase): Mono<UploadUrl>
 
-    fun getFileUrl(uuid: UUID): Mono<URL>
+    fun getFileDownloadPreSignedUrl(uuid: UUID): Mono<URL>
+
+    fun getFileDownloadUrl(uuid: UUID): Mono<URL>
 
     fun isExistFile(uuid: UUID): Mono<Boolean>
 

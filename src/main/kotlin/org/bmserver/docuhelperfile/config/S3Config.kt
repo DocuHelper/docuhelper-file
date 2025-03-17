@@ -29,7 +29,8 @@ class S3Config {
 
     @Bean
     fun amazonS3Client(): AmazonS3Client {
-        var awsCredentials: BasicAWSCredentials? = null
+        val awsCredentials = BasicAWSCredentials(accessKey, secretKey)
+
         val clientBuilder = AmazonS3ClientBuilder.standard()
 
         clientBuilder.setEndpointConfiguration(
@@ -38,7 +39,6 @@ class S3Config {
                 region,
             ),
         )
-        awsCredentials = BasicAWSCredentials(accessKey, secretKey)
         clientBuilder.enablePathStyleAccess()
 
         clientBuilder.withCredentials(AWSStaticCredentialsProvider(awsCredentials))

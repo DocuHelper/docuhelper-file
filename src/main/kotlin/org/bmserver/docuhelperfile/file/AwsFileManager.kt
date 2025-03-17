@@ -16,7 +16,7 @@ class AwsFileManager(
     @Value("\${s3.bucket}")
     lateinit var bucketName: String
 
-    override fun getPreSignedUrl(
+    override fun getUploadPreSignedUrl(
         path: String,
         name: String,
     ): URL {
@@ -27,7 +27,16 @@ class AwsFileManager(
         return s3Client.generatePresignedUrl(preUrlReq)
     }
 
-    override fun getUrl(
+
+    override fun getDownloadPreSignedUrl(path: String, name: String): URL {
+        val preUrlReq =
+            GeneratePresignedUrlRequest(bucketName, "$path/$name")
+                .withMethod(HttpMethod.GET)
+
+        return s3Client.generatePresignedUrl(preUrlReq)
+    }
+
+    override fun getDownloadUrl(
         path: String,
         name: String,
     ): URL = s3Client.getUrl(bucketName, "$path/$name")
@@ -45,6 +54,6 @@ class AwsFileManager(
 
         val url = s3Client.generatePresignedUrl(preUrlReq)
 
-        println("preUrlReq: " + url)
+        println("preUrlReq: $url")
     }
 }

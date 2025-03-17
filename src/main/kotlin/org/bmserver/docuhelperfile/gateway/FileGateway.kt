@@ -21,7 +21,7 @@ class FileGateway(
     private val fileServiceApplication: FileServiceApplication,
 ) {
     @PostMapping
-    fun uploadUrl(
+    fun uploadFileUrl(
         @RequestBody file: Mono<CreateUploadUrlUseCase>,
     ): Mono<UploadUrl> =
         file.flatMap {
@@ -29,9 +29,9 @@ class FileGateway(
         }
 
     @GetMapping("/{uuid}")
-    fun fileUrl(
+    fun downloadFileUrl(
         @PathVariable uuid: UUID,
-    ): Mono<URL> = fileServiceApplication.getFileUrl(uuid)
+    ): Mono<URL> = fileServiceApplication.getFileDownloadPreSignedUrl(uuid)
 
     @PatchMapping("/{uuid}/is-used")
     fun updateFileToUsed(

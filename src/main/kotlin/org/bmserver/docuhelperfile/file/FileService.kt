@@ -20,7 +20,7 @@ class FileService(
             .save(file.toFile())
             .map {
                 val url: URL =
-                    fileManager.getPreSignedUrl(
+                    fileManager.getUploadPreSignedUrl(
                         path = it.uuid.toString(),
                         name = it.name,
                     )
@@ -31,11 +31,21 @@ class FileService(
                 )
             }
 
-    override fun getFileUrl(uuid: UUID): Mono<URL> =
+    override fun getFileDownloadPreSignedUrl(uuid: UUID): Mono<URL> =
         fileDBManager
             .findById(uuid)
             .map {
-                fileManager.getUrl(
+                fileManager.getDownloadPreSignedUrl(
+                    path = it.uuid.toString(),
+                    name = it.name,
+                )
+            }
+
+    override fun getFileDownloadUrl(uuid: UUID): Mono<URL> =
+        fileDBManager
+            .findById(uuid)
+            .map {
+                fileManager.getDownloadUrl(
                     path = it.uuid.toString(),
                     name = it.name,
                 )

@@ -3,12 +3,17 @@ package org.bmserver.docuhelperfile.core
 import java.net.URL
 
 interface FileManager {
-    fun getPreSignedUrl(
+    fun getUploadPreSignedUrl(
         path: String,
         name: String,
     ): URL
 
-    fun getUrl(
+    fun getDownloadPreSignedUrl(
+        path: String,
+        name: String,
+    ): URL
+
+    fun getDownloadUrl(
         path: String,
         name: String,
     ): URL
