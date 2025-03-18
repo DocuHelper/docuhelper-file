@@ -8,6 +8,15 @@ spring:
     url: r2dbc:pool:postgres://${DB_HOST:192.168.0.7}:${DB_PORT:5432}/${DB_SCHEMA:docuhelper} # schema ??? webflux? ???
     username: ${DB_USER:postgres}
     password: ${DB_PASSWD:password}
+  kafka:
+    bootstrap-servers: ${KAFKA_HOST:192.168.0.7:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 
 s3:
   bucket: ${S3_BUCKET:docuhelper}

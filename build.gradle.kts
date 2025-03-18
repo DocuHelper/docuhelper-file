@@ -36,6 +36,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-aws
     implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
+
+    implementation("org.springframework.kafka:spring-kafka")
+    implementation("io.projectreactor.kafka:reactor-kafka")
 }
 
 kotlin {
