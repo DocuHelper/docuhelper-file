@@ -1,6 +1,6 @@
 package org.bmserver.docuhelperfile.file.eventListener
 
-//import org.bmserver.docuhelperfile.common.evenet.DocumentCreate
+import org.bmserver.core.common.event.EventKey
 import org.bmserver.core.document.event.DocumentCreate
 import org.bmserver.docuhelperfile.common.AbstractEventListener
 import org.bmserver.docuhelperfile.core.FileServiceApplication
@@ -11,7 +11,7 @@ import reactor.kotlin.core.publisher.toFlux
 
 @Component
 class DocumentCreateEventListener(
-    private val reactiveKafkaConsumerTemplate: ReactiveKafkaConsumerTemplate<String, Any>,
+    private val reactiveKafkaConsumerTemplate: ReactiveKafkaConsumerTemplate<EventKey, Any>,
     private val fileServiceApplication: FileServiceApplication
 ) : AbstractEventListener<DocumentCreate>(reactiveKafkaConsumerTemplate) {
     override fun handle(event: DocumentCreate): Flux<Any> {
