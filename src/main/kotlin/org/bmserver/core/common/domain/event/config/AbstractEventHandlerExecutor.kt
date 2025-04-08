@@ -22,7 +22,7 @@ abstract class AbstractEventHandlerExecutor(
             .flatMap {
                 val eventTypeName = it.first.eventType
                 val eventType = eventHandlerRegistry.getEventType(eventTypeName)
-                val eventValue = objectMapper.convertValue(it.second, eventType)
+                val eventValue = eventType?.let { currentEventType -> objectMapper.convertValue(it.second, currentEventType) }
 
                 val eventHandlers = eventType?.let { currentEventType -> eventHandlerRegistry.getEventHandler(currentEventType) } ?: emptyList()
 
