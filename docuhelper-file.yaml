@@ -37,6 +37,6 @@ spec:
     app: docuhelper-file
   ports:
     - protocol: TCP
-      targetPort: 8080    # pod 포트
-      port: 8080          # 서비스 내부 포트
-      nodePort: 30001      # 서비스 외부 포트
+      targetPort: 8082    # pod 포트
+      port: 8082          # 서비스 내부 포트
+      nodePort: 30004      # 서비스 외부 포트
