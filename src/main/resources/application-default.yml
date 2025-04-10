@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+spring:
+  r2dbc:
+    url: r2dbc:pool:postgres://192.168.0.7:5432/dev-docuhelper
+    username: postgres
+    password: password
+  kafka:
+    bootstrap-servers: 192.168.0.7:9094
+    consumer:
+      auto-offset-reset: latest
+
+s3:
+  bucket: docuhelper
+  endPoint: https://minio.bmserver.org
+  region: ap-northeast-2
+  credentials:
+    accessKey: ${S3_ACCESS_KEY:minioadmin}
+    secretKey: ${S3_SECRET_KEY:minioadmin}
+
+logging:
+  level:
+    org.springframework.jdbc.core: DEBUG
+    org.springframework.r2dbc: DEBUG
+    io.r2dbc.postgresql.PARAM: DEBUG
+

@@ -1,32 +1,9 @@
-server:
-  port: ${PORT:8082}
-
 spring:
   application:
     name: docuhelper-file
-  r2dbc:
-    url: r2dbc:pool:postgres://${DB_HOST:192.168.0.7}:${DB_PORT:5432}/docuhelper
-    username: ${DB_USER:postgres}
-    password: ${DB_PASSWD:password}
   kafka:
-    bootstrap-servers: ${KAFKA_HOST:192.168.0.7}:${KAFKA_PORT:9092}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    consumer:
-      auto-offset-reset: latest
 
-s3:
-  bucket: ${S3_BUCKET:docuhelper}
-  endPoint: ${S3_ENDPOINT:https://minio.bmserver.org}
-  region: ${S3_REGION:ap-northeast-2}
-  credentials:
-    accessKey: ${S3_ACCESS_KEY:minioadmin}
-    secretKey: ${S3_SECRET_KEY:minioadmin}
-
-logging:
-  level:
-    org.springframework.jdbc.core: DEBUG
-    org.springframework.r2dbc: DEBUG
-    io.r2dbc.postgresql.PARAM: DEBUG
 
