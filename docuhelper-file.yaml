@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: docuhelper-file-container
-          image: docker.bmserver.org/docuhelper-file
+          image: docker.bmserver.org/docuhelper-file:$IMAGE_TAG
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -32,11 +32,11 @@ metadata:
   name: docuhelper-file-service
 
 spec:
-  type: NodePort
+  type: ClusterIP
+  clusterIP: 10.98.59.138
   selector:
     app: docuhelper-file
   ports:
     - protocol: TCP
       targetPort: 8082    # pod 포트
       port: 8082          # 서비스 내부 포트
-      nodePort: 30004      # 서비스 외부 포트
